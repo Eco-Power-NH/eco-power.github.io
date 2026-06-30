@@ -153,7 +153,7 @@
 
       <br><br>
       <p>Street Address:</p>
-      <input type="text" id="address" placeholder="ex. 12 Main St">
+      <input type="text" id="address">
 
       <br><br>
 
@@ -227,27 +227,21 @@
       }
 
       // Sorting by rRgency
-      var score = 0;
-      if (medical === "Yes") { score = score + 10; }
-      if (duration === "1 hour") { score = score + 1; }
-      if (duration === "A few hours") { score = score + 2; }
-      if (duration === "1 day") { score = score + 3; }
-      if (duration === "More than 1 day") { score = score + 4; }
+    var report = {
+  town: town,
+  address: address,
+  medical: medical,
+  duration: duration
+};
 
-      var report = {
-        town: town,
-        address: address,
-        medical: medical,
-        duration: duration,
-        score: score
-      };
+outageList.push(report);
 
-      outageList.push(report);
-
-      // sort so highest urgency score is at the top
-      outageList.sort(function(a, b) {
-        return b.score - a.score;
-      });
+// put medical ones at the top
+outageList.sort(function(a, b) {
+  if (a.medical === "Yes" && b.medical !== "Yes") return -1;
+  if (b.medical === "Yes" && a.medical !== "Yes") return 1;
+  return 0;
+});
 
       updateTable();
       document.getElementById("address").value = "";
