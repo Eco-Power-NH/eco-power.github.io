@@ -156,7 +156,6 @@
       <input type="text" id="address">
 
       <br><br>
-
       <p>Is there anyone home who needs medical equipment or has a serious health condition?</p>
       <select id="medical">
         <option value="No">No</option>
@@ -175,7 +174,6 @@
 
       <button onclick="reportOutage()">Submit Report</button>
     </div>
-
     <div class="box">
       <h2>Current Outage Reports</h2>
       <p>Reports are automatically sorted so the most urgent ones (medical needs or longest outage) show up first.</p>
@@ -192,7 +190,7 @@
 
   </div>
   <script>
-    // ---- PAGE SWITCHING ----
+    // different pages
     function showPage(pageId) {
       var pages = document.getElementsByClassName("page");
       for (var i = 0; i < pages.length; i++) {
@@ -242,11 +240,9 @@ outageList.sort(function(a, b) {
   if (b.medical === "Yes" && a.medical !== "Yes") return 1;
   return 0;
 });
-
       updateTable();
       document.getElementById("address").value = "";
     }
-
     function updateTable() {
       var table = document.getElementById("outageTable");
       // reset when website reloads
