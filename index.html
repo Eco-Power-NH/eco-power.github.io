@@ -111,7 +111,6 @@
   <h1>Eco-Power</h1>
   <p>Transforming trees into usable energy for rural communities.</p>
 
-
   <!-- HOME PAGE -->
   <div id="home" class="page active">
 
@@ -138,7 +137,6 @@
 
   </div>
 
-
   <!-- OUTAGE REPORTER PAGE -->
   <div id="outage" class="page">
 
@@ -154,7 +152,6 @@
       </select>
 
       <br><br>
-
       <p>Street Address:</p>
       <input type="text" id="address" placeholder="ex. 12 Main St">
 
@@ -167,7 +164,6 @@
       </select>
 
       <br><br>
-
       <p>How long has the power been out?</p>
       <select id="duration">
         <option value="Less than 1 hour">Less than 1 hour</option>
@@ -175,7 +171,6 @@
         <option value="1 day">1 day</option>
         <option value="More than 1 day">More than 1 day</option>
       </select>
-
       <br><br>
 
       <button onclick="reportOutage()">Submit Report</button>
@@ -196,8 +191,6 @@
     </div>
 
   </div>
-
-
   <script>
     // ---- PAGE SWITCHING ----
     function showPage(pageId) {
@@ -208,7 +201,7 @@
       document.getElementById(pageId).classList.add("active");
     }
 
-    // ---- ENERGY CALCULATOR ----
+    // Trees to energy conversion
     function calculate() {
       var trees = document.getElementById("trees").value;
 
@@ -219,7 +212,7 @@
         "Estimated Energy Output: " + energyLowkWh + " – " + energyHighkWh + " kWh ";
     }
 
-    // ---- OUTAGE REPORTER ----
+    // Outage REporting Stuff
     var outageList = [];
 
     function reportOutage() {
@@ -233,7 +226,7 @@
         return;
       }
 
-      // give each report an urgency score so we can sort by who needs help first
+      // Sorting by rRgency
       var score = 0;
       if (medical === "Yes") { score = score + 10; }
       if (duration === "1 hour") { score = score + 1; }
@@ -257,24 +250,19 @@
       });
 
       updateTable();
-
-      // clear the address box so it's ready for the next report
       document.getElementById("address").value = "";
     }
 
     function updateTable() {
       var table = document.getElementById("outageTable");
-
-      // remove all rows except the header row
+      // reset when website reloads
       while (table.rows.length > 1) {
         table.deleteRow(1);
       }
-
       for (var i = 0; i < outageList.length; i++) {
         var report = outageList[i];
         var row = table.insertRow();
-
-        // highlight the row red if it's urgent (medical need)
+        //  row red color if that town needs medical assistance
         if (report.medical === "Yes") {
           row.className = "urgent";
         }
